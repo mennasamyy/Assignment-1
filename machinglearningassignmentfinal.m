@@ -6,9 +6,9 @@ alpha=0.01;
 Y=price(1:12968,:);
 YCV=price(12969:17291,:);
 YT=price(17292:21613,:);
-plot(grade,price, 'rx', 'MarkerSize', 10);
+%plot(grade,price, 'rx', 'MarkerSize', 10);
 
-% features=[ones(p,1), bedrooms, bathrooms, sqft_living, sqft_lot, floors, waterfront, view1, condition, grade, sqft_above, sqft_basement, yr_built, yr_renovated, zipcode, lat, long, sqft_living15, sqft_lot15];
+ features=[ones(p,1), bedrooms, bathrooms, sqft_living, sqft_lot, floors, waterfront, view1, condition, grade, sqft_above, sqft_basement, yr_built, yr_renovated, zipcode, lat, long, sqft_living15, sqft_lot15];
 % features0=[ones(p,1), sqft_above, sqft_basement, yr_built, yr_renovated, zipcode, lat, long, sqft_living15, sqft_lot15];
 % HP4=[ones(p,1), sqft_above.^4, sqft_basement.^4, yr_built.^4, yr_renovated.^4, zipcode.^4, lat.^4, long.^4, sqft_living15.^4, sqft_lot15.^4];
 % HP8=[ones(p,1), sqft_above.^8, sqft_basement.^8, yr_built.^8, yr_renovated.^8, zipcode.^8, lat.^8, long.^8, sqft_living15.^8, sqft_lot15.^8];
@@ -67,13 +67,11 @@ features330=[ones(4322,1), bedrooms(17292:21613,:), bathrooms(17292:21613,:), sq
 
 % features31=[ones(129681,1), bedrooms, bathrooms, sqft_living, sqft_lot, floors, waterfront, view1, condition, grade, sqft_above, sqft_basement, yr_built, yr_renovated, zipcode, lat, long, sqft_living15, sqft_lot15, H3P3];
 % features32=[ones(129681,1), bedrooms, bathrooms, sqft_living, sqft_lot, floors, waterfront, view1, condition, grade, sqft_above, sqft_basement, yr_built, yr_renovated, zipcode, lat, long, sqft_living15, sqft_lot15, H3P5];
-
-
-n3=length(features3(1,:));
-theta3=zeros(n3,1);
-for w=2:n3
-    if max(abs(features3(:,w)))~=0
-     features3(:,w)=(features3(:,w)-mean((features3(:,w))))./std(features3(:,w));
+n30=length(features30(1,:));
+theta30=zeros(n30,1);
+for w=2:n30
+    if max(abs(features30(:,w)))~=0
+     features30(:,w)=(features30(:,w)-mean((features30(:,w))))./std(features30(:,w));
     end
     
 end
@@ -87,10 +85,18 @@ for w=2:n330
     
 end
 
-
 Y=Y/mean(Y);
 YCV=YCV/mean(YCV);
 YT=YT/mean(YT);
+
+n3=length(features3(1,:));
+theta3=zeros(n3,1);
+for w=2:n3
+    if max(abs(features3(:,w)))~=0
+     features3(:,w)=(features3(:,w)-mean((features3(:,w))))./std(features3(:,w));
+    end
+    
+end
 
 J3=costfunction(features3, Y, theta3);
 [ theta3, J_history3 ] = Gradientdescentmethodfinal( features3,Y,theta3,alpha,J3 );
@@ -98,14 +104,7 @@ J3=costfunction(features3, Y, theta3);
 figure()
 plot(1:length(J_history3) , J_history3);
 
-n31=length(features31(1,:));
-theta31=zeros(n31,1);
-for w=2:n31
-    if max(abs(features31(:,w)))~=0
-     features31(:,w)=(features31(:,w)-mean((features31(:,w))))./std(features31(:,w));
-    end
-    
-end
+
 
 n311=length(features311(1,:));
 theta311=zeros(n311,1);
@@ -116,7 +115,14 @@ for w=2:n311
     
 end
 
-
+n31=length(features31(1,:));
+theta31=zeros(n31,1);
+for w=2:n31
+    if max(abs(features31(:,w)))~=0
+     features31(:,w)=(features31(:,w)-mean((features31(:,w))))./std(features31(:,w));
+    end
+    
+end
 
 J31=costfunction(features31, Y, theta31);
 [ theta31, J_history31 ] = Gradientdescentmethodfinal( features31,Y,theta31,alpha,J31 );
@@ -124,14 +130,7 @@ J31=costfunction(features31, Y, theta31);
 figure()
 plot(1:length(J_history31) , J_history31);
 
-n32=length(features32(1,:));
-theta32=zeros(n32,1);
-for w=2:n32
-    if max(abs(features32(:,w)))~=0
-     features32(:,w)=(features32(:,w)-mean((features32(:,w))))./std(features32(:,w));
-    end
-    
-end
+
 
 n322=length(features322(1,:));
 theta322=zeros(n322,1);
@@ -142,6 +141,14 @@ for w=2:n322
     
 end
 
+n32=length(features32(1,:));
+theta32=zeros(n32,1);
+for w=2:n32
+    if max(abs(features32(:,w)))~=0
+     features32(:,w)=(features32(:,w)-mean((features32(:,w))))./std(features32(:,w));
+    end
+    
+end
 
 J32=costfunction(features32, Y, theta32);
 [ theta32, J_history32 ] = Gradientdescentmethodfinal( features32,Y,theta32,alpha,J32 );
@@ -170,21 +177,16 @@ for w=2:n20
     
 end
 
+Y=Y/mean(Y);
+YCV=YCV/mean(YCV);
+YT=YT/mean(YT);
+
 J2=costfunction(features2, Y, theta2);
 [ theta2, J_history2 ] = Gradientdescentmethodfinal( features2,Y,theta2,alpha,J2 );
 
 figure()
 plot(1:length(J_history2) , J_history2);
 
-n21=length(features21(1,:));
-theta21=zeros(n21,1);
-
-for w=2:n21
-    if max(abs(features21(:,w)))~=0
-     features21(:,w)=(features21(:,w)-mean((features21(:,w))))./std(features21(:,w));
-    end
-    
-end
 
 n211=length(features211(1,:));
 theta211=zeros(n211,1);
@@ -196,7 +198,17 @@ for w=2:n211
     
 end
 
+n21=length(features21(1,:));
+theta21=zeros(n21,1);
 
+for w=2:n21
+    if max(abs(features21(:,w)))~=0
+     features21(:,w)=(features21(:,w)-mean((features21(:,w))))./std(features21(:,w));
+    end
+    
+end
+
+Y=Y/mean(Y);
 
 J21=costfunction(features21, Y, theta21);
 [ theta21, J_history21 ] = Gradientdescentmethodfinal( features21,Y,theta21,alpha,J21);
@@ -204,15 +216,6 @@ J21=costfunction(features21, Y, theta21);
 figure()
 plot(1:length(J_history21) , J_history21);
 
-n22=length(features22(1,:));
-theta22=zeros(n22,1);
-
-for w=2:n22
-    if max(abs(features22(:,w)))~=0
-     features22(:,w)=(features22(:,w)-mean((features22(:,w))))./std(features22(:,w));
-    end
-    
-end
 
 n222=length(features222(1,:));
 theta222=zeros(n222,1);
@@ -234,8 +237,17 @@ for w=2:n2220
     
 end
 
+n22=length(features22(1,:));
+theta22=zeros(n22,1);
 
+for w=2:n22
+    if max(abs(features22(:,w)))~=0
+     features22(:,w)=(features22(:,w)-mean((features22(:,w))))./std(features22(:,w));
+    end
+    
+end
 
+Y=Y/mean(Y);
 
 J22=costfunction(features22, Y, theta22);
 [ theta22, J_history22 ] = Gradientdescentmethodfinal( features22,Y,theta22,alpha,J22 );
@@ -243,15 +255,15 @@ J22=costfunction(features22, Y, theta22);
 figure()
 plot(1:length(J_history22) , J_history22);
 
-n1=length(features1(1,:));
-theta1=zeros(n1,1);
-
-for w=2:n1
-    if max(abs(features1(:,w)))~=0
-     features1(:,w)=(features1(:,w)-mean((features1(:,w))))./std(features1(:,w));
-    end
-    
-end
+% n1=length(features1(1,:));
+% theta1=zeros(n1,1);
+% 
+% for w=2:n1
+%     if max(abs(features1(:,w)))~=0
+%      features1(:,w)=(features1(:,w)-mean((features1(:,w))))./std(features1(:,w));
+%     end
+%     
+% end
 
 
 
@@ -364,10 +376,12 @@ end
 % errorfinal122=costfunction( features122,Y,theta12)
 % 
 % JFINAL1=costfunction( features111,Y,theta11);
-
+Y=Y/mean(Y);
 errorfinal2=costfunction( features2,Y,theta2)
 errorfinal21=costfunction( features21,Y,theta21)
 errorfinal22=costfunction( features22,Y,theta22)
+
+YCV=YCV/mean(YCV);
 
 errorfinal20=costfunction( features20,YCV,theta20)
 errorfinal211=costfunction( features211,YCV,theta211)
@@ -375,15 +389,20 @@ errorfinal222=costfunction( features222,YCV,theta222)
 
 JFINAL2=costfunction( features2220,YT,theta2220)
 % 60% DATA
+
 errorfinal3=costfunction( features3,Y,theta3)
 errorfinal31=costfunction( features31,Y,theta31)
 errorfinal32=costfunction( features32,Y,theta32)
 %CROSSVALIDATION
-errorfinal30=costfunction( features30,YCV,theta33)
+
+YCV=YCV/mean(YCV);
+
+errorfinal30=costfunction( features30,YCV,theta30)
 errorfinal311=costfunction( features311,YCV,theta311)
 errorfinal322=costfunction( features322,YCV,theta322)
 
 %TESTED
+YT=YT/mean(YT);
 JFINAL3=costfunction( features330,YT,theta330)
 
 % predictablegp = [1, 1, 2] * theta
